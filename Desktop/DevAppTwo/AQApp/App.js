@@ -1,29 +1,23 @@
 import { useState } from 'react';
 import { TextInput, Text, View, Button, ImageBackground, StyleSheet } from 'react-native';
 
-const productsExample = [
-  { id: 1, value: "Mate" },
-  { id: 2, value: "Cafe" },
-  { id: 3, value: "Harina" },
-  { id: 4, value: "Palmitos" },
-  { id: 5, value: "Yerba" },
-  { id: 6, value: "Mermelada" },
-  { id: 7, value: "Cacao" },
-  { id: 8, value: "Picadillo" },
-  { id: 9, value: "Pate" },
-  { id: 10, value: "Caballa" },
-  { id: 11, value: "Arroz" },
-  { id: 12, value: "Arvejas" },
-  { id: 13, value: "Sadinas" },
-  { id: 14, value: "Atun" },
-  { id: 15, value: "Choclo" },
-  { id: 16, value: "Lentejas" },
+const servicesExample = [
+  { id: 1, value: "Entrenamiento personalizado 1" },
+  { id: 2, value: "Entrenamiento personalizado 2" },
+  { id: 3, value: "Entrenamiento personalizado 3" },
+  { id: 4, value: "Entrenamiento personalizado 4" },
+  { id: 5, value: "Entrenamiento personalizado 5" },
+  { id: 6, value: "Dieta de entrenamiento 1" },
+  { id: 7, value: "Dieta de entrenamiento 2" },
+  { id: 8, value: "Dieta de entrenamiento 3" },
+  { id: 9, value: "Dieta de entrenamiento 4" },
+  { id: 10, value: "Dieta de entrenamiento 5" },
 ];
 
 export default function App() {
 
   const [textItem,setTextItem] = useState('')
-  const [itemList,setItemList] = useState(productsExample)
+  const [itemList,setItemList] = useState(servicesExample)
 
    const handleChangeText = (text) => {
     console.log(text)
