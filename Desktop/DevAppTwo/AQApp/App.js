@@ -1,7 +1,10 @@
 import { useState } from 'react';
-import { TextInput, Text, View, Button, ImageBackground, StyleSheet, FlatList, TouchableOpacity, Modal} from 'react-native';
+import { ImageBackground, StyleSheet } from 'react-native';
+import Header from './app/components/header/header';
+import ServiceInput from './app/components/serviceInput/serviceInput';
+import ServiceList from './app/components/serviceList/serviceList';
+import ServiceModal from './app/components/serviceModal/serviceModal';
 
-// Defino un ejemplo de servicios iniciales que mostraré en la aplicación
 const servicesExample = [
   { id: 1, value: "Entrenamiento personalizado 1" },
   { id: 2, value: "Entrenamiento personalizado 2" },
@@ -51,53 +54,15 @@ export default function App() {
       style={styles.contenedor}
       resizeMode="cover"
     >
-      <View style={styles.header}>
-        <Text style={styles.titulo}>AQFIT</Text>
-      </View>
-      
-      <TextInput 
-        value={textItem}
-        onChangeText={handleChangeText}
-        style={styles.input}
-        placeholder='Escribe algo en el input'
-        placeholderTextColor='gray'
+      <Header />
+      <ServiceInput textItem={textItem} handleChangeText={handleChangeText} addItem={addItem} />
+      <ServiceList itemList={itemList} handleModal={handleModal} />
+      <ServiceModal 
+        modalVisible={modalVisible} 
+        itemSelected={itemSelected} 
+        handleDelete={handleDelete} 
+        handleCancelModal={handleCancelModal} 
       />
-
-      <Button
-        title='Agregar servicios'
-        onPress={addItem}
-        color='white'
-      />
-
-      <View style={styles.servicesContainer}>
-        <FlatList
-          keyExtractor={(service) => service.id.toString()}
-          data={itemList}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              onPress={() => handleModal(item)}
-              style={styles.service}
-            >
-              <Text style={styles.serviceText}>{item.value}</Text>
-            </TouchableOpacity>
-          )}
-        />
-      </View>
-
-      <Modal visible={modalVisible} animationType="slide" transparent={true}>
-        <View style={styles.modalContainer}>
-          <View style={styles.textContainer}>
-            <Text>Estas seguro que queres borrar este servicio</Text>
-          </View>
-          <View style={styles.textContainer}>
-            <Text>{itemSelected.value}</Text>
-          </View>
-          <View style={styles.btnContainer}>
-            <Button title="Borrar" color="red" onPress={handleDelete} />
-            <Button title="Cancelar" color="green" onPress={handleCancelModal} />
-          </View>
-        </View>
-      </Modal>
     </ImageBackground>
   );
 }
@@ -109,56 +74,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 20,
   },
-  header: {
-    height: 80,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  titulo: {
-    fontSize: 50,
-    color: 'white',
-  },
-  input: {
-    color: 'white',
-    borderBottomWidth: 1,
-    borderBottomColor: 'white',
-    width: '80%',
-    padding: 10,
-    marginVertical: 10,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  servicesContainer: {
-    marginTop: 15,
-    paddingVertical: 10,
-    width: "90%",
-  },
-  service: {
-    alignItems: "center",
-    backgroundColor: "#cccccc",
-    borderRadius: 5,
-    justifyContent: "center",
-    marginVertical: 10,
-    paddingVertical: 15,
-  },
-  serviceText: {
-    fontSize: 24,
-    fontWeight: "bold",
-  },
-  btnContainer: {
-    flexDirection: "row",
-    gap: 20,
-  },
-  textContainer: {
-    fontWeight: "bold",
-  },
-  modalContainer: {
-    backgroundColor: "white",
-    width: "80%",
-    alignContent: "center",
-    gap: 20,
-    paddingVertical: 20,
-    borderRadius: 8,
-  },
 });
+
